@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://kit.fontawesome.com/fe4524f418.js" crossorigin="anonymous"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        #left{
+            border: 2px solid;
+            padding: 10px;
+            width: 30%;
+            margin: 40px;
+            box-shadow: 10px 5px 5px;
+        }
+        #add_btn{
+            /* padding: 10px; */
+            width: 200px;
+        }
+        #right{
+           /* border: 2px solid; */
+           width: 60%;
+           height: 200px;
+           margin-top: 40px;
+           display: flex;
+           flex-direction: row;
+        }
+        .main{
+            display: flex;
+        }
+        .reightClas{
+            border: 2px solid blue;
+            width: 20%;
+            height: 200px;
+            padding: 10px;
+            margin: 10px;
+        }
+        /* #right h1{
+            margin-left: 400px;
+        } */
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div id="left">
+            <input type="text" placeholder="Title" id="title">
+            <input type="color" id="color">
+
+            <div>
+                <textarea name="" id="inputtext" cols="30" rows="10"></textarea>
+
+            </div>
+            <button id="add_btn">Add_Note</button>
+        </div>
+        <div id="right">
+              
+               
+        </div>
+    </div>
+
+
+    <script>
+        const addBtn=document.getElementById("add_btn");
+        const input=document.getElementById("inputtext");
+        const rightBtn=document.getElementById("right");
+        const titleAdd=document.getElementById("title");
+        const color=document.getElementById("color");
+        const clearBtn=document.getElementById("clearBtn");
+        addBtn.addEventListener("click",notesfun);
+        color.addEventListener("click",colorChange);
+        // maxBtn.addEventListener("click",maxArea);
+        function notesfun(){
+            // clearBtn.innerHTML="X"
+            if(input.value===""){
+                alert("enter some text");
+                return;
+            }
+            let div=document.createElement("div");
+            let h3=document.createElement("h3")
+            let p=document.createElement("p");
+            let close_btn=document.createElement("button");
+            let maxBtn=document.createElement("button")
+            div.className="reightClas";
+            div.appendChild(h3);
+            div.appendChild(p);
+            div.appendChild(close_btn);
+            div.appendChild(maxBtn);
+            
+             
+            close_btn.innerHTML="X";
+            maxBtn.innerText="[]";
+            h3.innerText=titleAdd.value;
+            p.innerText=input.value;
+            div.style.backgroundColor=color.value;
+            console.log(div);
+
+            rightBtn.appendChild(div)
+            titleAdd.value="";
+            input.value="";
+            color.value="";
+            close_btn.addEventListener("click",function(){
+                div.style.display="none";
+            })
+            maxBtn.addEventListener("click",function(){
+                div.style.width="600px";
+                div.style.height="600px"
+            })
+            maxBtn.addEventListener("click",function(){
+                div.style.width="100px";
+                div.style.height="100px";
+                console.log("heloo");
+            })
+            close_btn.style.backgroundColor="black"
+            close_btn.style.color="white"
+            close_btn.style.marginLeft="150px"
+            close_btn.style.padding="3px"
+            maxBtn.style.backgroundColor="black"
+            maxBtn.style.color="white"
+            maxBtn.style.marginLeft="150px"
+            maxBtn.style.padding="3px"
+        }
+        function colorChange(){
+                input.style.backgroundColor=color.value;
+            }
+            
+    </script>
+</body>
+
+</html>

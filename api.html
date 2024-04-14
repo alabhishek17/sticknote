@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <div>
+            <h2>git_hub</h2>
+            <input type="text" placeholder="search"
+            id="searchInput">
+            <button id="searchBtn">search</button>
+            <div id="displayContent">
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+let searchBtn=document.getElementById("searchBtn");
+let input=document.getElementById("searchInput");
+let display1=document.getElementById("displayContent");
+searchBtn.addEventListener("click",gitApi);
+
+async function gitApi(){
+    const response=await fetch(`https://api.github.com/users/${input.value}`)
+    const data=await response.json();
+    console.log(data);
+    
+    
+        let apicard=document.createElement("div")
+        apicard.innerHTML=`
+        <p>${data.id}</p>
+        <p>${data.name}</p>
+        <p>${data.bio}</p>
+        <p>${data.created_at}</p>
+        <p>${data.followers}</p>
+        <p>${data.following}</p>
+        <p>${data.login}</p>
+        <p>${data.public_repos}</p>
+        <img src"${data.avatar_url}" alt="${data.name}" class="photo">
+        `
+        display1.append(apicard)
+
+        
+   
+}
+
+
+    </script>
+</body>
+</html>
