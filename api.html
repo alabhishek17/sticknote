@@ -1,54 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-</head>
-<body>
-    <div>
-        <div>
-            <h2>git_hub</h2>
-            <input type="text" placeholder="search"
-            id="searchInput">
-            <button id="searchBtn">search</button>
-            <div id="displayContent">
+    <script src="https://kit.fontawesome.com/fe4524f418.js" crossorigin="anonymous"></script>
+    <style>
+        #left {
+            border: 2px solid;
+            width: 20%;
+            height: 600px;
+            padding: 10px;
+            box-shadow: 5px 5px 5px;
+        }
 
-            </div>
+        #main {
+            display: flex;
+        }
+
+        .photo {
+            /* border-radius: 50%; */
+            object-fit: cover;
+            width: 200px;
+            height: 200px;
+        }
+
+        .subDive {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .repo ul {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            /* border: 2px solid; */
+            padding: 5px;
+            list-style-type: none;
+            box-shadow: 10px 5px 5px;
+        }
+        .social_icon{
+            display: flex;
+            justify-content: space-between;
+            
+        }
+        .social_icon ul{
+            list-style-type: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main">
+        <div id="left">
+            <h2><i class="fa-brands fa-github"></i> Git_hub</h2>
+            <input type="text" placeholder="search" id="searchInput">
+            <button id="searchBtn">search</button>
+        </div>
+        <div id="displayContent">
+
         </div>
     </div>
 
     <script>
-let searchBtn=document.getElementById("searchBtn");
-let input=document.getElementById("searchInput");
-let display1=document.getElementById("displayContent");
-searchBtn.addEventListener("click",gitApi);
+        let searchBtn = document.getElementById("searchBtn");
+        let input = document.getElementById("searchInput");
+        let display1 = document.getElementById("displayContent");
+        searchBtn.addEventListener("click", gitApi);
 
-async function gitApi(){
-    const response=await fetch(`https://api.github.com/users/${input.value}`)
-    const data=await response.json();
-    console.log(data);
-    
-    
-        let apicard=document.createElement("div")
-        apicard.innerHTML=`
-        <p>${data.id}</p>
-        <p>${data.name}</p>
-        <p>${data.bio}</p>
+        async function gitApi() {
+            const response = await fetch(`https://api.github.com/users/${input.value}`)
+            const data = await response.json();
+            // console.log(data);
+
+
+            let apicard = document.createElement("div")
+            apicard.innerHTML = `
+        <img src="${data.avatar_url}"  class="photo">
+        <div class="subDive">
+        <h3>${data.name}</h3>
         <p>${data.created_at}</p>
-        <p>${data.followers}</p>
-        <p>${data.following}</p>
-        <p>${data.login}</p>
-        <p>${data.public_repos}</p>
-        <img src"${data.avatar_url}" alt="${data.name}" class="photo">
-        `
-        display1.append(apicard)
-
+        </div>
+        <p>${data.bio}</p>
+        <div class="repo">
+        <ul>
+            <li>
+                <h3>repo</h3>
+                <p>${data.public_repos}</p>
+            </li>
+            <li>
+                <h3>followers</h3>
+                <p>${data.followers}</p>
+            </li>
+            <li>
+                <h3>following</h3>
+                <p>${data.following}</p>
+            </li>
+        </ul>
+    </div>
+       <div class="social_icon">
+            <ul>
+                <li>
+            <i class="fa-solid fa-location-dot"></i>
+            <span>${data.location}</span>
+            </li>
+            <li>
+                <i class="fa-solid fa-link"></i>
+            <span>${data.blog}</span>
+            </li>
+            </ul>
+                <ul>
+                    <li>
+                        <i class="fa-brands fa-twitter"></i>
+                <span>${data.twitter_usernam}</span>
+                </li>
+                <li>
+                    <i class="fa-solid fa-building"></i>
+                <span>${data.company}</span>
+                </li>
+                </ul>
+        </div>
         
-   
-}
+        
+        `
+            display1.append(apicard)
+
+            apicard.style.width = "80%"
+            apicard.style.marginLeft = "300px"
+            apicard.style.border = "2px solid"
+            apicard.style.boxShadow = "10px 5px 5px 5px"
+            apicard.style.padding = "10px"
+
+        }
 
 
     </script>
 </body>
+
 </html>
